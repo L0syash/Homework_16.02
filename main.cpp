@@ -103,3 +103,32 @@ BiList< T >* fromArray(const T* arr, size_t size) {
   }
   return head;
 }
+template< class T >
+void pushFront(BiList< T >*& head, const T& value) {
+  BiList< T >* newNode = new BiList< T >;
+  newNode->val = value;
+  newNode->prev = nullptr;
+  newNode->next = head;
+  if (head) {
+    head->prev = newNode;
+  }
+  head = newNode;
+}
+template< class T >
+void pushBack(BiList< T >*& head, const T& value) {
+  BiList< T >* newNode = new BiList< T >;
+  newNode->val = value;
+  newNode->next = nullptr;
+  if (!head) {
+    newNode->prev = nullptr;
+    head = newNode;
+    return;
+  }
+  BiList< T >* current = head;
+  while (current->next) {
+    current = current->next;
+  }
+  newNode->prev = current;
+  current->next = newNode;
+}
+
