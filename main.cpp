@@ -174,3 +174,12 @@ bool erase(BiList< T >*& head, const T& value) {
   delete current;
   return true;
 }
+template< class T >
+void clear(BiList< T >*& head) {
+  while (head) {
+    BiList< T >* temp = head;
+    head = head->next;
+    delete temp;
+  }
+  head = nullptr;
+}
