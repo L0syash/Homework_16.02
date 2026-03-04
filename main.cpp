@@ -190,6 +190,71 @@ void printArrayAndList(const T* arr, BiList< T >* list, size_t size) {
     std::cout << arr[i];
     if (i < size - 1) std::cout << ", ";
   }
-  std::cout << std::endl;
+  std::cout << "\n";
   print(list);
+}
+int main() {
+  size_t size = 5;
+  int* arr = new int[size];
+  for (size_t i = 0; i < size; ++i) {
+    arr[i] = i + 1;
+  }
+  std::cout << "=== ДВУСВЯЗНЫЙ СПИСОК (МИНИМАЛЬНЫЙ ИНТЕРФЕЙС) ===\n" << "\n";
+  // Вывод исходного массива
+  std::cout << "Массив: ";
+  for (size_t i = 0; i < size; ++i) {
+    std::cout << arr[i];
+    if (i < size - 1) std::cout << ", ";
+  }
+  std::cout << "\n";
+  // fromArray (создание из массива)
+  BiList<int>* list = fromArray(arr, size);
+  std::cout << "После fromArray: ";
+  print(list);
+  // pushFront
+  std::cout << "\n--- pushFront(0) ---" << "\n";
+  pushFront(list, 0);
+  print(list);
+  // pushBack
+  std::cout << "\n--- pushBack(6) ---" << "\n";
+  pushBack(list, 6);
+  print(list);
+  // popFront
+  std::cout << "\n--- popFront() ---" << "\n";
+  popFront(list);
+  print(list);
+  // popBack
+  std::cout << "\n--- popBack() ---" << "\n";
+  popBack(list);
+  print(list);
+  // find и erase
+  std::cout << "\n--- erase(3) ---" << "\n";
+  if (erase(list, 3)) {
+    std::cout << "Элемент 3 удален" << "\n";
+    print(list);
+  }
+  // erase несуществующего элемента
+  std::cout << "\n--- erase(100) ---" << "\n";
+  if (!erase(list, 100)) {
+    std::cout << "Элемент 100 не найден" << "\n";
+  }
+  print(list);
+  // find и демонстрация
+  std::cout << "\n--- find(4) ---" << "\n";
+  BiList<int>* found = find(list, 4);
+  if (found) {
+    std::cout << "Элемент 4 найден по адресу: " << found << "\n";
+  } else {
+    std::cout << "Элемент 4 не найден" << "\n";
+  }
+  // Очистка памяти
+  std::cout << "\n--- clear() ---" << "\n";
+  clear(list);
+  std::cout << "Список после clear(): ";
+  print(list);
+  if (list == nullptr) {
+    std::cout << "Список пуст (list == nullptr)" << "\n";
+  }
+  delete[] arr;
+  return 0;
 }
