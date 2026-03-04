@@ -183,3 +183,13 @@ void clear(BiList< T >*& head) {
   }
   head = nullptr;
 }
+template< class T >
+void printArrayAndList(const T* arr, BiList< T >* list, size_t size) {
+  std::cout << "Массив: ";
+  for (size_t i = 0; i < size; ++i) {
+    std::cout << arr[i];
+    if (i < size - 1) std::cout << ", ";
+  }
+  std::cout << std::endl;
+  print(list);
+}
