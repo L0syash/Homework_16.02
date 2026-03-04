@@ -150,3 +150,27 @@ BiList< T >* find(BiList< T >* head, const T& value) {
   }
   return nullptr;
 }
+template< class T >
+bool erase(BiList< T >*& head, const T& value) {
+  if (!head) return false;
+  BiList< T >* current = head;
+  while (current) {
+    if (current->val == value) {
+    break;
+    }
+    current = current->next;
+  }
+  if (!current) return false;
+  if (current == head) {
+    popFront(head);
+    return true;
+  }
+  if (current->prev) {
+    current->prev->next = current->next;
+  }
+  if (current->next) {
+    current->next->prev = current->prev;
+  }
+  delete current;
+  return true;
+}
