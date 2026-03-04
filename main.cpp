@@ -66,3 +66,20 @@ void print(BiList< T >* head);
 // Печать массива и списка
 template< class T >
 void printArrayAndList(const T* arr, BiList< T >* list, size_t size);
+
+template< class T >
+bool empty(BiList< T >* head) {
+  return head == nullptr;
+}
+template< class T >
+void print(BiList< T >* head) {
+  std::cout << "Список: ";
+  while (head) {
+    std::cout << head->val;
+    if (head->next) {
+      std::cout << " -> ";
+    }
+    head = head->next;
+  }
+  std::cout << "\n";
+}
