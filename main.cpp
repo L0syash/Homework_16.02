@@ -83,3 +83,23 @@ void print(BiList< T >* head) {
   }
   std::cout << "\n";
 }
+template< class T >
+BiList< T >* fromArray(const T* arr, size_t size) {
+  if (!arr || size == 0) return nullptr;
+  BiList< T >* head = nullptr;
+  BiList< T >* tail = nullptr;
+  for (size_t i = 0; i < size; ++i) {
+    BiList< T >* newNode = new BiList< T >;
+    newNode->val = arr[i];
+    newNode->next = nullptr;
+    newNode->prev = tail;
+    if (!head) {
+      head = newNode;
+    }
+    if (tail) {
+      tail->next = newNode;
+    }
+    tail = newNode;
+  }
+  return head;
+}
