@@ -15,10 +15,6 @@ void pushFront(BiList< T >*& head, const T& value);
 template< class T >
 void pushBack(BiList< T >*& head, const T& value);
 
-// Вставка после указанного узла
-template< class T >
-void insertAfter(BiList< T >* node, const T& value);
-
 // Удаление первого элемента
 template< class T >
 void popFront(BiList< T >*& head);
@@ -35,21 +31,9 @@ bool erase(BiList< T >*& head, const T& value);
 template< class T >
 BiList< T >* find(BiList< T >* head, const T& value);
 
-// Получение первого элемента
-template< class T >
-T& front(BiList< T >* head, bool& success);
-
-// Получение последнего элемента
-template< class T >
-T& back(BiList< T >* head, bool& success);
-
 // Проверка на пустоту
 template< class T >
 bool empty(BiList< T >* head);
-
-// Получение размера
-template< class T >
-int size(BiList< T >* head);
 
 // Очистка списка
 template< class T >
@@ -131,4 +115,38 @@ void pushBack(BiList< T >*& head, const T& value) {
   newNode->prev = current;
   current->next = newNode;
 }
-
+template< class T >
+void popFront(BiList< T >*& head) {
+  if (!head) return;
+  BiList< T >* temp = head;
+  head = head->next;
+  if (head) {
+    head->prev = nullptr;
+  }
+  delete temp;
+}
+template< class T >
+void popBack(BiList< T >*& head) {
+  if (!head) return;
+  if (!head->next) {
+    delete head;
+    head = nullptr;
+    return;
+  }
+  BiList< T >* current = head;
+  while (current->next) {
+    current = current->next;
+  }
+  current->prev->next = nullptr;
+  delete current;
+}
+template< class T >
+BiList< T >* find(BiList< T >* head, const T& value) {
+  while (head) {
+    if (head->val == value) {
+      return head;
+    }
+    head = head->next;
+  }
+  return nullptr;
+}
